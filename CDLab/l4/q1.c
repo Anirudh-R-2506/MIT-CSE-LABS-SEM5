@@ -272,6 +272,7 @@ struct token getNextToken(FILE *fin, struct token prevToken)
                     }
                     tkn.args = nargs;
                     tkn.id = 2;
+                    strcpy(tkn.ttype, "Func");
                     fseek(fin, 0 - (cnt + 2), SEEK_CUR);
                 }
                 else if (c == ';' || c == '='){
