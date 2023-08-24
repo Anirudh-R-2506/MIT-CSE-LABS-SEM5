@@ -36,8 +36,9 @@ unsigned int tindex = 0;
 char buf[024];
 
 const char specialsymbols[] = {'?', ';', ':', ',', '(', ')', '{', '}', '[', ']'};
-const char *keywords[] = {"printf", "auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while"};
+const char *keywords[] = {"auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while"};
 const char arithmeticsymbols[] = {'*', '/', '-', '+', '^'};
+const char *predefinedFunc[] = {"printf", "scanf"};
 
 int charBelongsTo(int c, char t)
 {
@@ -64,6 +65,15 @@ int isKeyword(const char *str)
     for (int i = 0; i < sizeof(keywords) / sizeof(char *); i++)
     {
         if (strcmp(str, keywords[i]) == 0)
+            return 1;
+    }
+    return 0;
+}
+
+int isPredefinedFunc(const char *str)
+{
+    for(int i = 0; i < sizeof(predefinedFunc) / sizeof(char *); i++){
+        if (strcmp(str, predefinedFunc[i]) == 0)
             return 1;
     }
     return 0;
@@ -262,7 +272,9 @@ struct token getNextToken(FILE *fin, struct token prevToken)
                 prevType = "Identifier";
                 c = fgetc(fin);
                 if (c == '('){
-                    strcpy(tkn.rtype, prevToken.token_name);
+                    if (isPredefinedFunc(tkn.token_name) == 0){
+                        strcpy(tkn.rtype, prevToken.token_name);
+                    }
                     int nargs = 0, cnt = 0;
                     while ((c = fgetc(fin)) != EOF && c != ')')
                     {
