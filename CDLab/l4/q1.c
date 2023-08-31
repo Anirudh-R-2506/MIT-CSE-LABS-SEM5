@@ -287,7 +287,7 @@ struct token getNextToken(FILE *fin, struct token prevToken)
                     strcpy(tkn.ttype, "Func");
                     fseek(fin, 0 - (cnt + 2), SEEK_CUR);
                 }
-                else if (c == ';' || c == '='){
+                else if (c == ';' || c == '=' || c == ',' || c == ')'){
                     strcpy(tkn.dtype, prevToken.token_name);
                     tkn.id = 1;
                     strcpy(tkn.ttype, "Var");
@@ -306,13 +306,13 @@ struct token getNextToken(FILE *fin, struct token prevToken)
                         }
                         tkn.args = nargs;
                         strcpy(tkn.ttype, "Func");
-                        fseek(fin, 0 - (cnt + 2), SEEK_CUR);
+                        fseek(fin, 0 - (cnt + 3), SEEK_CUR);
                     }
-                    else if (c == '='){
+                    else if (c == '=' || c == ',' || c == ')'){
                         strcpy(tkn.dtype, prevToken.token_name);
                         tkn.id = 1;
                         strcpy(tkn.ttype, "Var");
-                        fseek(fin, -1, SEEK_CUR);
+                        fseek(fin, -2, SEEK_CUR);
                     }
                     else{
                         fseek(fin, -2, SEEK_CUR);
@@ -425,7 +425,7 @@ int main()
             else{
                 tindex++;
                 if(insert(tkn) == 0){
-                    snprintf(tokenId, 30, "id%d", searchVal);
+                    snprintf(tokenId, 30, "id%d", tindex);
                     strcpy(tkn.token_name, tokenId);
                 }
                 else{
