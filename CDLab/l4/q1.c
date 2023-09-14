@@ -31,12 +31,13 @@ typedef struct symbol
 
 symbol* table[10];
 
+int gotOpenBracket = 0;
 unsigned int row = 1, col = 1;
 unsigned int tindex = 0;
 char buf[024];
 
-const char specialsymbols[] = {'?', ';', ':', ',', '(', ')', '{', '}', '[', ']'};
-const char *keywords[] = {"auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while"};
+const char specialsymbols[] = {'?', ';', ':', ',', '(', ')', '[', ']'};
+const char *keywords[] = {"sizeof", "auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while"};
 const char arithmeticsymbols[] = {'*', '/', '-', '+', '^'};
 const char *predefinedFunc[] = {"printf", "scanf"};
 
@@ -51,6 +52,15 @@ int charBelongsTo(int c, char t)
     else if (t == 's'){
         len = sizeof(specialsymbols) / sizeof(char); 
         arr = specialsymbols;
+        if (c == '}'){
+            if (gotOpenBracket != 1)
+                gotOpenBracket--;
+            return 1;
+        }
+        if (c == '{'){
+            gotOpenBracket++;
+            return 1;
+        }
     }
     for (int i = 0; i < len; i++)
     {
@@ -287,7 +297,7 @@ struct token getNextToken(FILE *fin, struct token prevToken)
                     strcpy(tkn.ttype, "Func");
                     fseek(fin, 0 - (cnt + 2), SEEK_CUR);
                 }
-                else if (c == ';' || c == '=' || c == ',' || c == ')'){
+                else if (c == ';' || c == '=' || c == ',' || c == ')' || c == '[' || c == ']' || c == '+' || c == '-'){
                     strcpy(tkn.dtype, prevToken.token_name);
                     tkn.id = 1;
                     strcpy(tkn.ttype, "Var");
@@ -308,7 +318,7 @@ struct token getNextToken(FILE *fin, struct token prevToken)
                         strcpy(tkn.ttype, "Func");
                         fseek(fin, 0 - (cnt + 3), SEEK_CUR);
                     }
-                    else if (c == '=' || c == ',' || c == ')'){
+                    else if (c == '=' || c == ',' || c == ')' || c == '[' || c == ']'){
                         strcpy(tkn.dtype, prevToken.token_name);
                         tkn.id = 1;
                         strcpy(tkn.ttype, "Var");
@@ -416,13 +426,13 @@ int main()
     char tokenId[30];
     int searchVal;
     while ((tkn = getNextToken(fin, tkn)).row != -1){
-        if (tkn.id != 0){
-            searchVal = search(tkn.token_name);
-            if (searchVal != 0){
-                snprintf(tokenId, 30, "id%d", searchVal);
-                strcpy(tkn.token_name, tokenId);
-            }
-            else{
+        searchVal = search(tkn.token_name);
+        if (searchVal != 0){
+            snprintf(tokenId, 30, "id%d", searchVal);
+            strcpy(tkn.token_name, tokenId);
+        }
+        else{
+            if (tkn.id != 0){
                 tindex++;
                 if(insert(tkn) == 0){
                     snprintf(tokenId, 30, "id%d", tindex);
@@ -433,7 +443,9 @@ int main()
                 }
             }
         }
-        fprintf(fo, "<%s, %s: %d, %d>\n", tkn.token_name, tkn.type, tkn.row, tkn.col);
+        fprintf(fo, "<%s: %d, %d>\n", tkn.token_name, tkn.row, tkn.col);
+        for(i=0; i<gotOpenBracket; i++)
+            fprintf(fo, "\t");
     }
     fclose(fin);
     fclose(fo);
