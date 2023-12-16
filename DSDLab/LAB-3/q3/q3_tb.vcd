@@ -1,0 +1,90 @@
+$date
+	Sat Dec 16 09:51:09 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module q3_tb $end
+$var wire 1 ! lt $end
+$var wire 1 " gt $end
+$var wire 1 # eq $end
+$var reg 3 $ a [2:0] $end
+$var reg 3 % b [2:0] $end
+$scope module ex1 $end
+$var wire 3 & a [2:0] $end
+$var wire 3 ' b [2:0] $end
+$var wire 1 # eq $end
+$var wire 1 " gt $end
+$var wire 1 ! lt $end
+$var wire 1 ( x0 $end
+$var wire 1 ) x1 $end
+$var wire 1 * x2 $end
+$var wire 1 + y0 $end
+$var wire 1 , y1 $end
+$var wire 1 - y2 $end
+$var wire 1 . z0 $end
+$var wire 1 / z1 $end
+$var wire 1 0 z2 $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+00
+0/
+0.
+0-
+1,
+0+
+0*
+1)
+0(
+b1 '
+b11 &
+b1 %
+b11 $
+0#
+1"
+0!
+$end
+#20
+1#
+0"
+0,
+0)
+0-
+b110 %
+b110 '
+b110 $
+b110 &
+#40
+1"
+0#
+1,
+1)
+1(
+1+
+b100 %
+b100 '
+b111 $
+b111 &
+#60
+0"
+1#
+0,
+0)
+0(
+0+
+b10 %
+b10 '
+b10 $
+b10 &
+#80
+b0 %
+b0 '
+b0 $
+b0 &
+#100

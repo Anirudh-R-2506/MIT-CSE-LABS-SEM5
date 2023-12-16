@@ -1,0 +1,110 @@
+$date
+	Fri Dec 15 10:12:45 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module q3_tb $end
+$var wire 4 ! sum [3:0] $end
+$var wire 1 " cout $end
+$var reg 4 # a [3:0] $end
+$var reg 4 $ b [3:0] $end
+$var reg 1 % cin $end
+$var reg 1 & k $end
+$scope module ex1 $end
+$var wire 4 ' a [3:0] $end
+$var wire 4 ( b [3:0] $end
+$var wire 1 % cin $end
+$var wire 1 & k $end
+$var wire 4 ) sum [3:0] $end
+$var wire 4 * i [3:0] $end
+$var wire 1 " cout $end
+$var wire 3 + c [3:1] $end
+$scope module stage0 $end
+$var wire 1 , a $end
+$var wire 1 - b $end
+$var wire 1 % cin $end
+$var wire 1 . cout $end
+$var wire 1 / sum $end
+$upscope $end
+$scope module stage1 $end
+$var wire 1 0 a $end
+$var wire 1 1 b $end
+$var wire 1 2 cin $end
+$var wire 1 3 cout $end
+$var wire 1 4 sum $end
+$upscope $end
+$scope module stage2 $end
+$var wire 1 5 a $end
+$var wire 1 6 b $end
+$var wire 1 7 cin $end
+$var wire 1 8 cout $end
+$var wire 1 9 sum $end
+$upscope $end
+$scope module stage3 $end
+$var wire 1 : a $end
+$var wire 1 ; b $end
+$var wire 1 < cin $end
+$var wire 1 " cout $end
+$var wire 1 = sum $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0=
+0<
+0;
+0:
+19
+08
+17
+06
+05
+14
+13
+12
+11
+10
+0/
+1.
+1-
+1,
+b11 +
+b11 *
+b110 )
+b11 (
+b11 '
+0&
+0%
+b11 $
+b11 #
+0"
+b110 !
+$end
+#20
+07
+0"
+03
+02
+0<
+0.
+b0 +
+08
+1/
+14
+19
+b1111 !
+b1111 )
+1=
+0-
+01
+16
+1;
+b1100 *
+1&
+#40

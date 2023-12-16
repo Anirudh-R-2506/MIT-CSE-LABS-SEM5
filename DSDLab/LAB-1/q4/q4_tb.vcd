@@ -1,0 +1,102 @@
+$date
+	Wed Dec 13 15:15:05 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module q4_tb $end
+$var wire 1 ! f $end
+$var reg 1 " a $end
+$var reg 1 # b $end
+$var reg 1 $ c $end
+$var reg 1 % d $end
+$var integer 32 & i [31:0] $end
+$scope module ex1 $end
+$var wire 1 " a $end
+$var wire 1 # b $end
+$var wire 1 $ c $end
+$var wire 1 % d $end
+$var wire 1 ! f $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 &
+0%
+0$
+0#
+0"
+0!
+$end
+#20
+1%
+b1 &
+#40
+1!
+1$
+0%
+b10 &
+#60
+0!
+1%
+b11 &
+#80
+1#
+0$
+0%
+b100 &
+#100
+1!
+1%
+b101 &
+#120
+1!
+1$
+0%
+b110 &
+#140
+0!
+1%
+b111 &
+#160
+1!
+1"
+0#
+0$
+0%
+b1000 &
+#180
+1%
+b1001 &
+#200
+1$
+0%
+b1010 &
+#220
+0!
+1%
+b1011 &
+#240
+1#
+0$
+0%
+b1100 &
+#260
+1!
+1%
+b1101 &
+#280
+1!
+1$
+0%
+b1110 &
+#300
+0!
+1%
+b1111 &
+#320
+b10000 &
